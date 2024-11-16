@@ -1,4 +1,8 @@
-.root{
+.root {
     color: #000000;
     background-color: #ffff;
+}
+
+.container {
+    display: flex;
 }
