@@ -14,7 +14,12 @@ const Home = () => {
                 <NavBar />
                 <div className={styles.heroSection}>
                     <HeroTabSection />
-                    <MarqueeText />
+                    <MarqueeText
+                    text="This is a scrolling text marquee!"
+                    speed={1} 
+                    direction="left" 
+                    pauseOnHover={true} 
+                    className={styles.marqueeTextDiv} />
                     <FeatureSection/>
                 </div>
                 </div>
