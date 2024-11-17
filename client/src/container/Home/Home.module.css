@@ -5,4 +5,21 @@
 
 .container {
     display: flex;
+    width: 100%;
+}
+
+.heroSection {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.marqueeTextDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(244, 244, 8);
+    height: 40px;
 }
