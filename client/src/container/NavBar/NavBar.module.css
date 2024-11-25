@@ -3,6 +3,7 @@
     color: #000000;
     min-width: 25%;
     margin-top: 15px;
+    max-height: 10px;
 }
 
 .category {
