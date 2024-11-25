@@ -15,14 +15,14 @@ const Home = () => {
                 <div className={styles.heroSection}>
                     <HeroTabSection />
                     <MarqueeText
-                    text="This is a scrolling text marquee!"
-                    speed={1} 
-                    direction="left" 
-                    pauseOnHover={true} 
-                    className={styles.marqueeTextDiv} />
-                    <FeatureSection/>
+                        text="Your B.Tech 2k25 Final Year Project Deadline is on 16th of December"
+                        speed={1}
+                        direction="left"
+                        pauseOnHover={true}
+                        className={styles.marqueeTextDiv} />
+                    <FeatureSection />
                 </div>
-                </div>
+            </div>
         </div>
     )
 }

@@ -10,8 +10,7 @@ const NavBar = () => {
                 {data.map((category, index) => (
                     <div className={styles.category} key={category.id}>
                         <div className={styles.element}>{category.item}</div>
-                        <div className={styles.icon}> <GeraterArrow/>
-                        </div>
+                        <div className={styles.icon}> <GeraterArrow /> </div>
                     </div>
                 ))}
             </div>
