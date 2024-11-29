@@ -24,7 +24,8 @@ export const data = [{
 },
 {
     id: 7,
-    item: 'FAQs'
+    item: 'FAQs',
+    path: '/faqs'
 },
 {
     id: 8,
