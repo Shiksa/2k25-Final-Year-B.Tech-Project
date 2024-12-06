@@ -6,6 +6,15 @@
     width: 100%;
 }
 
+.cardText {
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+
 @media (max-width: 768px) {
     .cardSection {
         grid-template-columns: 1fr;
