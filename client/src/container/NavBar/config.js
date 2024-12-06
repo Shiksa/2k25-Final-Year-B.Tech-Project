@@ -20,7 +20,8 @@ export const data = [{
 },
 {
     id: 6,
-    item: 'Health Record'
+    item: 'Health Record',
+    link: 'healthrecord'
 },
 {
     id: 7,

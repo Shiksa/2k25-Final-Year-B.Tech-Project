@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./FAQs.css";
+import styles from "./Faqs.module.css";
 
 const FAQs = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -17,24 +17,24 @@ const FAQs = () => {
   };
 
   return (
-    <section className="faqs">
-      <h2 className="faqs-title">All the A's to your Q's</h2>
-      <div className="faq-list">
+    <section className={styles.faqs}>
+      <h2 className={styles.faqsTitle}>All the A's to your Q's</h2>
+      <div className={styles.faqList}>
         {faqs.map((faq, index) => (
           <div
-            className={`faq-item ${openIndex === index ? "open" : ""}`}
+            className={`${styles.faqItem} ${openIndex === index ? "open" : ""}`}
             key={index}
             onClick={() => toggleFAQ(index)}
           >
-            <div className="faq-question">
+            <div className={styles.faqQuestion}>
               {faq.question}
-              <span className="faq-toggle">{openIndex === index ? "-" : "+"}</span>
+              <span className={styles.faqToggle}>{openIndex === index ? "-" : "+"}</span>
             </div>
-            {openIndex === index && <div className="faq-answer">{faq.answer}</div>}
+            {openIndex === index && <div className={styles.faqAnswer}>{faq.answer}</div>}
           </div>
         ))}
       </div>
-      <div className="faqs-footer">
+      <div className={styles.faqsFooter}>
         <h3>Still have questions?</h3>
         <p>
           Book a call with our team to learn how we can help you better manage your e-commerce business—forever.

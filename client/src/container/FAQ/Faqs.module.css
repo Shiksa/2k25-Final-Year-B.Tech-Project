@@ -4,18 +4,18 @@
     font-family: Arial, sans-serif;
   }
   
-  .faqs-title {
+  .faqsTitle {
     color: #4f2ecc;
     font-size: 2rem;
     margin-bottom: 1.5rem;
   }
   
-  .faq-list {
+  .faqList {
     max-width: 600px;
     margin: 0 auto;
   }
   
-  .faq-item {
+  .faqItem {
     background: #f4f0ff;
     border: 1px solid #d9d5ff;
     margin-bottom: 1rem;
@@ -25,16 +25,16 @@
     transition: background 0.3s ease, transform 0.2s ease;
   }
   
-  .faq-item:hover {
+  .faqItem:hover {
     background: #eae4ff;
     transform: translateY(-2px);
   }
   
-  .faq-item.open {
+  .faqItem.open {
     background: #e0d6ff;
   }
   
-  .faq-question {
+  .faqQuestion {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,31 +43,31 @@
     font-weight: bold;
   }
   
-  .faq-toggle {
+  .faqToggle {
     font-size: 1.5rem;
     font-weight: bold;
   }
   
-  .faq-answer {
+  .faqAnswer {
     margin-top: 0.5rem;
     color: #555;
     font-size: 0.9rem;
   }
   
-  .faqs-footer {
+  .faqsFooter {
     margin-top: 2rem;
     padding: 1rem;
     background-color: #f8f4ff;
     border-radius: 8px;
   }
   
-  .faqs-footer h3 {
+  .faqsFooter h3 {
     color: #4f2ecc;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
   
-  .faqs-footer p {
+  .faqsFooter p {
     color: #555;
     font-size: 1rem;
   }
