@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Card.module.css'
 
-const Card = ({ text, color }) => {
+const Card = ({ text }) => {
   return (
-    <div className={styles.root} style={{ backgroundColor: color }}>
+    <div className={styles.root}>
       {text}
     </div>
   );

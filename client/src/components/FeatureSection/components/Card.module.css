@@ -1,12 +1,16 @@
 .root {
     height: 150px;
-    border-radius: 15px;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
-    font-size: larger;
-    font-weight: 600;
-    text-decoration: none;
-    /*Text decoration not taking*/
+    background: linear-gradient(to bottom, #9CDBA6, #50B498);
+}
+
+.root:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
 }

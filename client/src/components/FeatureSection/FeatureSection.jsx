@@ -7,13 +7,18 @@ const FeatureSection = () => {
   return (
     <div className={styles.root}>
       <div className={styles.cardSection}>
-        <Card text={'Medicine Remainder'} color={'#9CDBA6'} />
-
-        <Link to={'/specialization'}>
-          <Card text={'Book Appointment'} color={'#9CDBA6'} />
+        <Link to={'/alert-for-medicine'} className={styles.cardText}>
+          <Card text={'Medicine Reminder'} />
         </Link>
 
-        <Card text={'Upload Prescription'} color={'#9CDBA6'} />
+        <Link to={'/specialization'} className={styles.cardText}>
+          <Card text={'Appointment Booking'} />
+        </Link>
+
+        <Link to={'/prescription-upload'} className={styles.cardText}>
+          <Card text={'Upload Prescription'} />
+        </Link>
+
       </div>
     </div>
   )
