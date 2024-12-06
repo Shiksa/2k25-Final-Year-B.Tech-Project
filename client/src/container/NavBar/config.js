@@ -20,11 +20,13 @@ export const data = [{
 },
 {
     id: 6,
-    item: 'Health Record'
+    item: 'Health Record',
+    link: 'healthrecord'
 },
 {
     id: 7,
-    item: 'FAQs'
+    item: 'FAQs',
+    path: '/faqs'
 },
 {
     id: 8,
