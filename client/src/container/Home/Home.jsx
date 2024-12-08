@@ -9,7 +9,6 @@ import FeatureSection from '../../components/FeatureSection/FeatureSection'
 const Home = () => {
     return (
         <div className={styles.root}>
-            <Header />
             <div className={styles.container}>
                 <NavBar />
                 <div className={styles.heroSection}>
