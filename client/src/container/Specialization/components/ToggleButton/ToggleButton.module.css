@@ -1,0 +1,73 @@
+.toggleContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  /* Smaller width than the search box */
+  max-width: 60vh;
+  margin: 0 auto 20px auto;
+  /* Center it and add space below */
+  padding: 5px;
+  background-color: #d8f3dc;
+  /* Soft green background */
+  border-radius: 40px;
+  /* Fully rounded container */
+  box-shadow: 0px 4px 8px rgba(0, 128, 0, 0.2);
+  /* Subtle shadow */
+  position: relative;
+  /* For the sliding effect */
+}
+
+.toggleContainer::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 10px);
+  /* Adjust width to cover one button */
+  height: calc(100% - 10px);
+  /* Match container height with padding */
+  background-color: #95d5b2;
+  /* Vibrant green for the sliding effect */
+  border-radius: 40px;
+  /* Fully rounded slider */
+  transition: transform 0.4s ease;
+  /* Smooth sliding animation */
+  z-index: 1;
+  /* Ensure it is below text */
+}
+
+.toggleButton {
+  flex: 1;
+  /* Equal space for both buttons */
+  padding: 10px 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  /* Transparent to allow slider effect */
+  color: #fff;
+  /* Dark green text */
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 40px;
+  /* Fully rounded buttons */
+  z-index: 2;
+  /* Text above slider */
+  transition: color 0.3s;
+  position: relative;
+  /* For proper stacking with the slider */
+}
+
+.toggleButton.active {
+  color: #006400;
+  /* White text for active button */
+}
+
+.toggleContainer[data-active="left"]::before {
+  transform: translateX(0);
+  /* Stay at the left side */
+}
+
+.toggleContainer[data-active="right"]::before {
+  transform: translateX(100%);
+  /* Slide to the right */
+}

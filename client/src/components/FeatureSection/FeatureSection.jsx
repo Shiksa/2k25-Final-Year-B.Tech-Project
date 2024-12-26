@@ -11,7 +11,7 @@ const FeatureSection = () => {
           <Card text={'Medicine Reminder'} />
         </Link>
 
-        <Link to={'/specialization'} className={styles.cardText}>
+        <Link to={'/doctors'} className={styles.cardText}>
           <Card text={'Appointment Booking'} />
         </Link>
 
