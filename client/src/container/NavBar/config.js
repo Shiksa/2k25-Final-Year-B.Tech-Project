@@ -2,7 +2,7 @@ export const data = [
     {
         id: 1,
         item: 'Book Appointment',
-        link: '/specialization',
+        link: '/doctors',
     },
     {
         id: 2,
