@@ -17,13 +17,14 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/specialization" element={<Specialization />} />
           <Route path="/prescription-upload" element={<PrescriptionUpload />} />
           <Route path="/period-tracker" element={<PeriodTracker />} />
           <Route path="/customer-support" element={<CustomerSupport />} />
           <Route path="/faqs" element={<FAQs />} />
           <Route path="/health-record" element={<HealthRecord />} />
-          <Route path="/specialization/:id" element={<DoctorCard />} />
+          <Route path="/doctors" element={<DoctorCard />} />
+          <Route path="/specialization" element={<Specialization />} />
+          <Route path="/specialization/:specialization" element={<DoctorCard />} />
         </Route>
       </Routes>
     </Router>
