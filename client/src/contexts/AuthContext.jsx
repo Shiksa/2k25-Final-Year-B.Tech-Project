@@ -1,29 +1,71 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const { isAuthenticated, user, getAccessTokenSilently, logout, loginWithRedirect } = useAuth0();
+  const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const fetchToken = async () => {
-      if (isAuthenticated) {
-        try {
-          const token = await getAccessTokenSilently();
-          setToken(token);
-        } catch (error) {
-          console.error('Error fetching token:', error);
-        }
-      }
-    };
+    const params = new URLSearchParams(window.location.search);
+    const authToken = params.get('token');
+    const name = params.get('name');
+    const email = params.get('email');
+    const picture = params.get('picture');
 
-    fetchToken();
-  }, [isAuthenticated, getAccessTokenSilently]);
+    if (authToken) {
+      // Save token and user data to local storage and state
+      setToken(authToken);
+      localStorage.setItem('access_token', authToken);
+
+      const userData = { name, email, picture };
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+
+      setIsAuthenticated(true);
+
+      // Clear token and user info from URL
+      window.history.replaceState({}, document.title, '/');
+    } else {
+      // Check local storage for existing token and user
+      const storedToken = localStorage.getItem('access_token');
+      const storedUser = localStorage.getItem('user');
+      if (storedToken) {
+        setToken(storedToken);
+        setIsAuthenticated(true);
+      }
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    }
+  }, []);
+
+
+  const handleLogin = () => {
+    // Redirect to Google OAuth login
+    window.location.href = 'http://localhost:5000/auth/google';
+  };
+
+  const handleLogout = () => {
+    // Clear local storage and state
+    localStorage.removeItem('user');
+    localStorage.removeItem('access_token');
+    setUser(null);
+    setToken(null);
+    setIsAuthenticated(false);
+  };
+
+  const handleLoginSuccess = (userData, authToken) => {
+    setUser(userData);
+    setToken(authToken);
+    setIsAuthenticated(true);
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('access_token', authToken);
+  };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, token, loginWithRedirect, logout }}>
+    <AuthContext.Provider value={{ user, token, isAuthenticated, handleLogin, handleLogout, handleLoginSuccess }}>
       {children}
     </AuthContext.Provider>
   );

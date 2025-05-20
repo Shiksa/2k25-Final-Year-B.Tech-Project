@@ -1,0 +1,39 @@
+.filterContainer {
+  padding: 20px;
+  background-color: #e3f2fd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filterGroup {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+select:focus,
+input:focus {
+  border-color: #4caf50;
+}
+
+@media (max-width: 768px) {
+  .filterContainer {
+    padding: 10px;
+  }
+}
