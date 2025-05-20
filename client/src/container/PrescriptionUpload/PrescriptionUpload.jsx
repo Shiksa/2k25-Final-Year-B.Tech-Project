@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./PrescriptionUpload.module.css";
-import { AiOutlineFilePdf } from "react-icons/ai";
+import { AiOutlineFileJpg } from "react-icons/ai";
 
 const PrescriptionUpload = () => {
   const [file, setFile] = useState(null);
@@ -54,17 +54,17 @@ const PrescriptionUpload = () => {
     <div className={styles.uploadContainer}>
       <div className={styles.uploadCard}>
         <div className={styles.iconWrapper}>
-          <AiOutlineFilePdf size={40} />
+          <AiOutlineFileJpg size={40} />
         </div>
         <h2>Upload Prescription</h2>
         <form className={styles.uploadForm} onSubmit={handleUpload}>
           <label className={styles.customFileLabel} htmlFor="fileInput">
-            Choose PDF
+            Choose JPG
           </label>
           <input
             type="file"
             id="fileInput"
-            accept=".pdf"
+            accept=".jpg"
             onChange={handleFileChange}
           />
           <button type="submit" className={styles.uploadButton} disabled={!file}>
