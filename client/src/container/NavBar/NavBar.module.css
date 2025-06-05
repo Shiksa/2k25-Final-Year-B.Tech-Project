@@ -1,25 +1,118 @@
+/* NavBar.module.css */
+
+/* Main Container */
 .root {
-    background-color: #fff;
-    color: #000000;
-    min-width: 25%;
-    margin-top: 15px;
+    background-color: #f7f7f7;
+    /* Fairy-tale gradient */
+    padding: 15px 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    width: 450px;
+    /* Increased width */
+    margin: 0 auto;
 }
 
+/* Wrapper for Centering */
+.contentWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Align items to the left */
+    justify-content: center;
+}
+
+/* Category Styling */
 .category {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     width: 100%;
-    padding: 8px 14px;
-    cursor: pointer;
-    margin-bottom: 15px;
+    padding: 12px 30px;
+    /* Increased padding for more width */
+    margin: 8px 0;
+    border-radius: 25px;
+    background: linear-gradient(135deg, #ffffff, #c7efce);
+    /* Soft gradient for each category */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    white-space: nowrap;
+    /* Prevent text wrapping */
+    overflow: hidden;
+    /* Ensure text does not overflow */
+    text-overflow: ellipsis;
+    /* Add ellipsis for long text */
 }
 
+.category:hover {
+    background: linear-gradient(135deg, #c7efce, #81d6be);
+    /* Hover gradient */
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Category Text */
 .element {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-right: 15px;
+    position: relative;
+    z-index: 2;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+    /* Prevent text wrapping */
 }
 
+.category:hover .element {
+    color: #55687c;
+    /* Light purple color */
+}
+
+/* Link */
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Icon Styling */
 .icon {
-    font-weight: 600;
+    position: absolute;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+}
+
+.category:hover .icon {
+    transform: translateX(5px);
+}
+
+/* Greater Arrow */
+.icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #a15dff;
+    transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.category:hover .icon svg {
+    transform: translateX(5px);
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .root {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .contentWrapper {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .category {
+        width: 100%;
+        margin: 5px 0;
+    }
 }
