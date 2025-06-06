@@ -30,10 +30,10 @@ const Footer = () => {
 
         {/* Section 2: Contact Information */}
         <div className={styles.section}>
-          <h3 className={styles.title}>Contact</h3>
+          <h3 className={styles.title}>Contact Us</h3>
           <p><FaEnvelope className={styles.iconSmall} /> Email: <a href={`mailto:${email}`} className={styles.contactCredential}>{email}</a></p>
-          <p><FaPhoneAlt className={styles.iconSmall} /> Phone: <a href={`tel:${phoneNumber}`} className={styles.contactCredential}>{phoneNumber}</a></p>
-          <p><FaWhatsapp className={styles.iconSmall} /> WhatsApp: <a href={`https://wa.me/${phoneNumber}`} className={styles.contactCredential} target="_blank" rel="noopener noreferrer">{phoneNumber}</a></p>
+          <p><FaPhoneAlt className={styles.iconSmall} /> Phone: <a href={`tel:${phoneNumber}`} className={styles.contactCredential}> {phoneNumber}</a></p>
+          <p><FaWhatsapp className={styles.iconSmall} /> WhatsApp: <a href={`https://wa.me/${phoneNumber}`} className={styles.contactCredential} target="_blank" rel="noopener noreferrer"> {phoneNumber}</a></p>
         </div>
 
         {/* Section 3: Address */}
