@@ -9,6 +9,7 @@ import FAQs from './container/FAQ/Faqs';
 import HealthRecord from './container/HealthRecord/HealthRecord'
 import Layout from './components/Layout/Layout';
 import DoctorCard from './container/Specialization/components/DoctorsCard/DoctorCard';
+import GoogleCalendarReminder from './container/MedicineReminder/GoogleCalendarReminder';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/doctors" element={<DoctorCard />} />
         <Route path="/specialization" element={<Specialization />} />
         <Route path="/specialization/:specialization" element={<DoctorCard />} />
+        <Route path='/medicine-reminder' element={<GoogleCalendarReminder />} />
       </Route>
     </Routes>
   )
