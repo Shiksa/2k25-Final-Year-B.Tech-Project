@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { gapi } from 'gapi-script';
 import styles from './GoogleCalendarReminder.module.css';
 
-const CLIENT_ID = '1960096376-0li91jpm8g10f47uua4eblfur70fcc82.apps.googleusercontent.com';
-const API_KEY = 'AIzaSyDCltvYaijNYKfHM7ZviFVNXvm63fONFjA';
-const SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
+const API_KEY = import.meta.env.VITE_API_KEY;
+const SCOPES = import.meta.env.VITE_SCOPES;
 
 function GoogleCalendarReminder() {
   const [medicineName, setMedicineName] = useState('');
@@ -73,17 +73,22 @@ function GoogleCalendarReminder() {
           event.recurrence = [recurrenceRules[repeat]];
         }
 
-        await gapi.client.calendar.events.insert({
+        const response = await gapi.client.calendar.events.insert({
           calendarId: 'primary',
           resource: event,
-        }).execute((event) => {
-          if (event.htmlLink) {
-            console.log(`✅ Reminder created: ${event.htmlLink}`);
-          }
         });
+
+        console.log(`✅ Reminder created: ${response.result.htmlLink}`);
       }
 
       alert('✅ All medicine reminders created!');
+
+      // ✅ Clear form after submission
+      setMedicineName('');
+      setDate('');
+      setDoseCount(1);
+      setDoseTimes(['']);
+      setRepeat('none');
     } catch (err) {
       console.error('Error creating event:', err);
       alert('⚠️ Could not create the reminders.');
@@ -92,29 +97,29 @@ function GoogleCalendarReminder() {
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <h2>Set Medicine Reminder</h2>
+      <h1>Set Medicine Reminder</h1>
       <div className={styles.formRow}>
-      <label className={styles.label}>
-        Medicine Name:
-        <input
-          type="text"
-          value={medicineName}
-          onChange={(e) => setMedicineName(e.target.value)}
-          required
-          className={styles.input}
-        />
-      </label>
+        <label className={styles.label}>
+          Medicine Name:
+          <input
+            type="text"
+            value={medicineName}
+            onChange={(e) => setMedicineName(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </label>
 
-      <label className={styles.label}>
-        Date:
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          required
-          className={styles.input}
-        />
-      </label>
+        <label className={styles.label}>
+          Date:
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+            className={styles.input}
+          />
+        </label>
       </div>
 
       <label className={styles.label}>
@@ -130,7 +135,7 @@ function GoogleCalendarReminder() {
       </label>
 
       {doseTimes.map((time, index) => (
-        <label key={index} className={styles.formRow}>
+        <label key={index} className={styles.label}>
           Dose {index + 1} Time:
           <input
             type="time"
@@ -149,7 +154,7 @@ function GoogleCalendarReminder() {
           onChange={(e) => setRepeat(e.target.value)}
           className={styles.select}
         >
-          <option value="none">Does not repeat</option>
+          <option value="none">No Repetation</option>
           <option value="daily">Daily</option>
           <option value="weekly">Weekly</option>
           <option value="monthly">Monthly</option>
@@ -157,7 +162,7 @@ function GoogleCalendarReminder() {
       </label>
 
       <button type="submit" className={styles.button}>
-        Add to Google Calendar
+        Set Reminder
       </button>
     </form>
   );

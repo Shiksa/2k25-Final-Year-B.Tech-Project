@@ -7,7 +7,7 @@ const FeatureSection = () => {
   return (
     <div className={styles.root}>
       <div className={styles.cardSection}>
-        <Link to={'/alert-for-medicine'} className={styles.cardText}>
+        <Link to={'/medicine-reminder'} className={styles.cardText}>
           <Card text={'Medicine Reminder'} />
         </Link>
 
