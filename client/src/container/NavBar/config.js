@@ -44,9 +44,9 @@ export const data = [
         item: 'Customer Support',
         link: '/customer-support',
     },
-    {
-        id: 10,
-        item: 'Raise Issue',
-        link: '/raise-issue',
-    },
+    // {
+    //     id: 10,
+    //     item: 'Raise Issue',
+    //     link: '/raise-issue',
+    // },
 ];

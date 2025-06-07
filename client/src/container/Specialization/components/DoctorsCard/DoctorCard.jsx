@@ -14,6 +14,11 @@ const DoctorCard = () => {
   const { token } = useAuth();
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+
+  useEffect(() => {
     axios.get('http://localhost:5000/api/doctors')
       .then((response) => {
         setDoctors(response.data);
@@ -88,26 +93,33 @@ const DoctorCard = () => {
           filteredDoctors.map((doctor) => (
             <div key={doctor['d-id']} className={styles.card}>
               <h2 className={styles.name}>{doctor.name}</h2>
-              <div className={styles.imageContainer}>
-                <img
-                  src={doctor.image}
-                  alt={`${doctor.name}'s profile`}
-                  className={styles.image}
-                  loading="lazy"
-                />
+              <div className={styles.cardDetails}>
+                <div className={styles.details}>
+                  <p className={styles.details}><strong>Age:</strong> {doctor.age}</p>
+                  <p className={styles.details}><strong>Sex:</strong> {doctor.sex}</p>
+                  <p className={styles.details}><strong>Specialization:</strong> {doctor.specialization}</p>
+                  <p className={styles.details}><strong>Experience:</strong> {doctor.experience} years</p>
+                  <p className={styles.details}><strong>City:</strong> {doctor.city}</p>
+                  <p className={styles.details}><strong>Mode of Appointment:</strong> {doctor['mode of appointment']}</p>
+                  <p className={styles.details}><strong>Phone No:</strong> {doctor['ph no']}</p>
+                  <p className={styles.details}><strong>Email Id:</strong> {doctor['email id']}</p>
+                  <p className={styles.details}><strong>Days:</strong> {doctor['days available']}</p>
+                  <p className={styles.details}><strong>Timing:</strong> {doctor.timing}</p>
+                  <p className={styles.details}><strong>Fees:</strong> ₹{doctor.fees}</p>
+                </div>
+                <div className={styles.imageContainer}>
+                  <img
+                    src={doctor.image}
+                    alt={`${doctor.name}'s profile`}
+                    className={styles.image}
+                    loading="lazy"
+                  />
+                </div>
               </div>
-              <p className={styles.details}><strong>Age:</strong> {doctor.age}</p>
-              <p className={styles.details}><strong>Sex:</strong> {doctor.sex}</p>
-              <p className={styles.details}><strong>Specialization:</strong> {doctor.specialization}</p>
-              <p className={styles.details}><strong>Experience:</strong> {doctor.experience} years</p>
-              <p className={styles.details}><strong>City:</strong> {doctor.city}</p>
-              <p className={styles.details}><strong>Mode of Appointment:</strong> {doctor['mode of appointment']}</p>
-              <p className={styles.details}><strong>Phone No:</strong> {doctor['ph no']}</p>
-              <p className={styles.details}><strong>Email Id:</strong> {doctor['email id']}</p>
-              <p className={styles.details}><strong>Days:</strong> {doctor['days available']}</p>
-              <p className={styles.details}><strong>Timing:</strong> {doctor.timing}</p>
-              <p className={styles.details}><strong>Fees:</strong> ₹{doctor.fees}</p>
-              <button className={styles.bookButton} onClick={() => handleBookAppointment(doctor)}>Book Appointment</button>
+              <div className={styles.button}>
+                <button className={styles.bookButton} onClick={() => handleBookAppointment(doctor)}>Book Appointment</button>
+              </div>
+
             </div>
           ))
         ) : (
