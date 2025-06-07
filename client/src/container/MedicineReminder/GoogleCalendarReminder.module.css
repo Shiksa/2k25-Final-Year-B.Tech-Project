@@ -1,19 +1,18 @@
 .container {
   width: 100%;
-  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem 3rem;
-  background-color: #e6f0fa; /* light blue */
-  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #9CDBA6);
+  font-family: "Arial", sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-h2 {
+h1 {
   text-align: center;
   color: #003366;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .formRow {
@@ -37,11 +36,12 @@ h2 {
   margin-top: 0.5rem;
   padding: 0.8rem 1rem;
   border: 1px solid #a3c1e0;
-  border-radius: 4px;
+  border-radius: 30px;
   font-size: 1rem;
   background-color: #ffffff;
   width: 100%;
   box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .input:focus,
@@ -50,21 +50,32 @@ h2 {
   outline: none;
 }
 
+.input:hover,
+.select:hover {
+  transform: scale(1.05);
+}
+
 .button {
-  align-self: flex-start;
+  align-self: center;
+  margin-top: 0.3rem;
   padding: 0.9rem 1.5rem;
-  background-color: #007acc;
-  color: #fff;
+  background: linear-gradient(135deg, #ffffff, #c7efce);
+  color: #2c3e50;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .button:hover {
-  background-color: #005c99;
+  background: linear-gradient(135deg, #b2e3df, #1ea5da);
+  /* Hover gradient */
+  transform: translateY(-5px);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive behavior */

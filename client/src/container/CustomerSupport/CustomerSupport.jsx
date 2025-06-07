@@ -31,7 +31,7 @@ const CustomerSupport = () => {
     return errors;
   };
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwGqnhI-lzSRwEpY6OHOwBLtBRfQe4yR-4LQh-fslUvjck3a7s1kiVt-AXJqn0lJSdd0Q/exec';
+  const scriptURL = import.meta.env.VITE_SCRIPT_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
