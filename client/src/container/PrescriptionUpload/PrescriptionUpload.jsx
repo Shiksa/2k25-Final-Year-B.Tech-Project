@@ -10,13 +10,18 @@ const PrescriptionUpload = () => {
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
 
-    if (selectedFile && selectedFile.type === "application/pdf") {
+    if (
+      selectedFile &&
+      (selectedFile.type === "image/jpeg" ||
+        selectedFile.type === "image/jpg" ||
+        selectedFile.type === "image/png")
+    ) {
       setFile(selectedFile);
       setError("");
       setSuccessMessage("File selected successfully.");
     } else {
       setFile(null);
-      setError("Please upload a valid PDF file.");
+      setError("Please upload a valid image file (.jpg, .jpeg, or .png).");
       setSuccessMessage("");
     }
   };
@@ -25,7 +30,7 @@ const PrescriptionUpload = () => {
     e.preventDefault();
 
     if (!file) {
-      setError("No file selected. Please upload a PDF.");
+      setError("No file selected. Please upload an image.");
       return;
     }
 
@@ -59,12 +64,12 @@ const PrescriptionUpload = () => {
         <h2>Upload Prescription</h2>
         <form className={styles.uploadForm} onSubmit={handleUpload}>
           <label className={styles.customFileLabel} htmlFor="fileInput">
-            Choose JPG
+            Choose Image
           </label>
           <input
             type="file"
             id="fileInput"
-            accept=".jpg"
+            accept=".jpg,.jpeg,.png"
             onChange={handleFileChange}
           />
           <button type="submit" className={styles.uploadButton} disabled={!file}>
@@ -78,7 +83,7 @@ const PrescriptionUpload = () => {
           )}
         </form>
         <p className={styles.infoText}>
-          Only PDF files are allowed. Ensure your prescription is clearly scanned.
+          Only image files (.jpg, .jpeg, .png) are allowed. Ensure your prescription is clearly scanned.
         </p>
       </div>
     </div>
