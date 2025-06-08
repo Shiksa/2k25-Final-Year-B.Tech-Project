@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 const doctorRoutes = require('./routes/doctorRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const healthRecordRoutes = require("./routes/healthRecordRoutes");
+const prescriptionRoutes = require("./routes/prescriptionRoutes");
 
 dotenv.config();
 const app = express();
@@ -84,7 +85,8 @@ app.get(
 // API Routes
 app.use('/api', doctorRoutes); //Use the doctorRoutes module
 app.use('/api', eventRoutes); // Use the eventRoutes module
-app.use("/api", healthRecordRoutes);
+app.use("/api/health-records", healthRecordRoutes); // Use the healthRecordRoutes module
+app.use('/api', prescriptionRoutes); // Use the prescriptionRoutes module
 
 // Default Route
 app.get('/', (req, res) => {

@@ -13,7 +13,7 @@ router.get("/:email", async (req, res) => {
 });
 
 // POST new record
-router.post("/health-records", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const record = new HealthRecord(req.body);
     await record.save();

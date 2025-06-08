@@ -10,6 +10,7 @@ import HealthRecord from './container/HealthRecord/HealthRecord'
 import Layout from './components/Layout/Layout';
 import DoctorCard from './container/Specialization/components/DoctorsCard/DoctorCard';
 import GoogleCalendarReminder from './container/MedicineReminder/GoogleCalendarReminder';
+import OldPrescription from './container/OldPrescription/OldPrescription';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="/prescription-upload" element={<PrescriptionUpload />} />
+        <Route path="/old-prescription" element={<OldPrescription />} />
         <Route path="/period-tracker" element={<PeriodTracker />} />
         <Route path="/customer-support" element={<CustomerSupport />} />
         <Route path="/faqs" element={<FAQs />} />
