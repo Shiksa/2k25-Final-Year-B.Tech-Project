@@ -1,15 +1,21 @@
-.container {
-    max-width: 800px;
+.healthRecordPage {
     margin: 0 auto;
-    padding: 20px;
-    background-color: #f5fff5;
+    background: linear-gradient(135deg, #e3f2fd, #9CDBA6);
+}
+
+.container {
+    margin: 0 auto;
+    padding: 70px;
     border: 1px solid #cce5cc;
     border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .title {
+    font-size: 2rem;
+    font-weight: bold;
     text-align: center;
-    color: #4caf50;
+    color: #2c3e50;
     margin-bottom: 20px;
 }
 
@@ -19,11 +25,35 @@
     gap: 15px;
 }
 
-.input {
+.input,
+.inputHalf,
+.select {
     padding: 10px;
     border: 1px solid #a5d6a7;
     border-radius: 5px;
     font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inputHalf {
+    width: 48%;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.textarea {
+    padding: 10px;
+    border: 1px solid #a5d6a7;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 80px;
+    width: 100%;
 }
 
 .button {
@@ -33,25 +63,54 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .button:hover {
     background-color: #45a049;
 }
 
+.diagnosis {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #856404;
+}
+
 .table {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
+    font-size: 14px;
 }
 
-.table th, .table td {
-    border: 1px solid #cce5cc;
+.table th,
+.table td {
+    border: 1px solid #c7edc7;
     padding: 10px;
     text-align: center;
+    background-color: #ffffff5e;
 }
 
 .table th {
     background-color: #e8f5e9;
     color: #2e7d32;
+}
+
+.deleteBtn {
+    background: none;
+    border: none;
+    color: #f44336;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.deleteBtn:hover {
+    transform: scale(1.2);
+    color: #d32f2f;
 }

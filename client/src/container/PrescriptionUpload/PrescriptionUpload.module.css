@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 90vh;
   background: linear-gradient(135deg, #e3f2fd, #9CDBA6);
   font-family: "Arial", sans-serif;
 }
@@ -19,7 +19,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  height: 60vh;
+  height: 70vh;
 }
 
 /* Icon container for the scanning effect */
@@ -50,7 +50,7 @@
 /* Form styles */
 .uploadForm {
   margin: 20px;
-  margin-top: 8vh;
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   gap: 15px;
