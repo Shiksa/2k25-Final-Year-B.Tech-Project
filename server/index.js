@@ -8,6 +8,7 @@ const session = require('express-session');
 const dotenv = require('dotenv');
 const doctorRoutes = require('./routes/doctorRoutes');
 const eventRoutes = require('./routes/eventRoutes');
+const healthRecordRoutes = require("./routes/healthRecordRoutes");
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,8 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
+
 app.use(
   session({ secret: 'your_secret', resave: false, saveUninitialized: true })
 );
@@ -81,6 +84,7 @@ app.get(
 // API Routes
 app.use('/api', doctorRoutes); //Use the doctorRoutes module
 app.use('/api', eventRoutes); // Use the eventRoutes module
+app.use("/api", healthRecordRoutes);
 
 // Default Route
 app.get('/', (req, res) => {
