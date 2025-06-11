@@ -160,8 +160,8 @@ const HealthRecord = () => {
 
 
     return (
-        <div className={styles.healthRecordPage}>
-            <div className={styles.container}>
+        <div className={styles.container}>
+            <div className={styles.card}>
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <h2 className={styles.title}>Health Record Form</h2>
 
@@ -220,13 +220,15 @@ const HealthRecord = () => {
 
                     <button type="submit" className={styles.button}>Save Record</button>
                 </form>
+            </div>
 
-                {diagnosis && (
-                    <div className={styles.diagnosis}>
-                        <strong>Latest Diagnosis:</strong> {diagnosis}
-                    </div>
-                )}
+            {diagnosis && (
+                <div className={styles.diagnosis}>
+                    <strong>Latest Diagnosis:</strong> {diagnosis}
+                </div>
+            )}
 
+            <div class="table-wrapper">
                 <table className={styles.table}>
                     <thead>
                         <tr>

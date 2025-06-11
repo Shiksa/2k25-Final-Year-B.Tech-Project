@@ -96,75 +96,79 @@ function GoogleCalendarReminder() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
-      <h1>Set Medicine Reminder</h1>
-      <div className={styles.formRow}>
-        <label className={styles.label}>
-          Medicine Name:
-          <input
-            type="text"
-            value={medicineName}
-            onChange={(e) => setMedicineName(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <h1>Set Medicine Reminder</h1>
+          <div className={styles.formRow}>
+            <label className={styles.label}>
+              Medicine Name:
+              <input
+                type="text"
+                value={medicineName}
+                onChange={(e) => setMedicineName(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </label>
 
-        <label className={styles.label}>
-          Date:
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
+            <label className={styles.label}>
+              Date:
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+                className={styles.input}
+              />
+            </label>
+          </div>
+
+          <label className={styles.label}>
+            Number of Doses:
+            <input
+              type="number"
+              min="1"
+              value={doseCount}
+              onChange={(e) => setDoseCount(parseInt(e.target.value))}
+              required
+              className={styles.input}
+            />
+          </label>
+
+          {doseTimes.map((time, index) => (
+            <label key={index} className={styles.label}>
+              Dose {index + 1} Time:
+              <input
+                type="time"
+                value={time}
+                onChange={(e) => handleDoseTimeChange(index, e.target.value)}
+                required
+                className={styles.input}
+              />
+            </label>
+          ))}
+
+          <label className={styles.label}>
+            Repeat:
+            <select
+              value={repeat}
+              onChange={(e) => setRepeat(e.target.value)}
+              className={styles.select}
+            >
+              <option value="none">No Repetation</option>
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </label>
+
+          <button type="submit" className={styles.button}>
+            Set Reminder
+          </button>
+        </form>
       </div>
-
-      <label className={styles.label}>
-        Number of Doses:
-        <input
-          type="number"
-          min="1"
-          value={doseCount}
-          onChange={(e) => setDoseCount(parseInt(e.target.value))}
-          required
-          className={styles.input}
-        />
-      </label>
-
-      {doseTimes.map((time, index) => (
-        <label key={index} className={styles.label}>
-          Dose {index + 1} Time:
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => handleDoseTimeChange(index, e.target.value)}
-            required
-            className={styles.input}
-          />
-        </label>
-      ))}
-
-      <label className={styles.label}>
-        Repeat:
-        <select
-          value={repeat}
-          onChange={(e) => setRepeat(e.target.value)}
-          className={styles.select}
-        >
-          <option value="none">No Repetation</option>
-          <option value="daily">Daily</option>
-          <option value="weekly">Weekly</option>
-          <option value="monthly">Monthly</option>
-        </select>
-      </label>
-
-      <button type="submit" className={styles.button}>
-        Set Reminder
-      </button>
-    </form>
+    </div>
   );
 }
 
