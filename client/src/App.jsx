@@ -11,6 +11,8 @@ import Layout from './components/Layout/Layout';
 import DoctorCard from './container/Specialization/components/DoctorsCard/DoctorCard';
 import GoogleCalendarReminder from './container/MedicineReminder/GoogleCalendarReminder';
 import OldPrescription from './container/OldPrescription/OldPrescription';
+import BookAppointment from './container/Specialization/components/BookAppointment/BookAppointment';
+
 
 const App = () => {
   return (
@@ -27,6 +29,7 @@ const App = () => {
         <Route path="/specialization" element={<Specialization />} />
         <Route path="/specialization/:specialization" element={<DoctorCard />} />
         <Route path='/medicine-reminder' element={<GoogleCalendarReminder />} />
+        <Route path="/book-appointment/:id" element={<BookAppointment />} />
       </Route>
     </Routes>
   )
