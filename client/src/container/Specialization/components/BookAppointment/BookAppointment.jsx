@@ -181,8 +181,8 @@ const BookAppointment = () => {
       <div className={styles.card}>
         <h2>Book Appointment with Dr. {doctor?.name}</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
-          <input name="name" value={formData.name} placeholder="Your Name" required onChange={handleChange} />
-          <input name="email" value={formData.email} type="email" placeholder="Your Email" required onChange={handleChange} />
+          <input name="name" value={formData.name} placeholder="Your Name" required onChange={handleChange} className={styles.input} />
+          <input name="email" value={formData.email} type="email" placeholder="Your Email" required onChange={handleChange} className={styles.input} />
           <input
             name="phone"
             value={formData.phone}
@@ -192,6 +192,7 @@ const BookAppointment = () => {
             pattern="[6-9]{1}[0-9]{9}"
             title="Enter a valid 10-digit Indian mobile number starting with 6-9"
             maxLength="10"
+            className={styles.input}
           />
           <textarea name="description" value={formData.description} placeholder="Short description about your issue" onChange={handleChange} />
 
@@ -236,6 +237,7 @@ const BookAppointment = () => {
               max={max}
               onChange={handleChange}
               required
+              className={styles.input}
             />
           </div>
 
@@ -256,6 +258,7 @@ const BookAppointment = () => {
                 onChange={handleChange}
                 required
                 min="1"
+                className={styles.input}
               />
             )}
           </div>
