@@ -97,17 +97,29 @@
 
 .formSection {
   grid-column: span 2;
-  margin-top: 1rem;
-  background-color: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 1.5rem;
+  margin-top: 0.1rem;
   padding: 1.5rem;
   color: #2c3e50;
-  background: #9CDBA6;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 25px;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
 
+.formSection::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #ffffff44, #a1c4fd44, #c2e9fb44);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .formSection:hover {
@@ -122,7 +134,7 @@
 }
 
 .form {
-  margin-top: 1rem;
+  margin-top: .5rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -131,12 +143,20 @@
 
 .input,
 .textarea {
+  padding: 0.8rem 1rem;
+  border: 1px solid #a3c1e0;
+  border-radius: 30px;
+  font-size: 1rem;
+  background-color: #ffffff;
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  color: black;
-  background-color: white;
-  transition: transform 0.3s ease-out;
+  box-sizing: border-box;
+  transition: all 0.6s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #007acc;
+  outline: none;
 }
 
 .input:hover,
@@ -149,19 +169,27 @@
 }
 
 .button {
-  width: 100%;
-  background-color: #16a34a;
-  color: white;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
+  align-self: center;
+  margin-top: 0.3rem;
+  padding: 0.9rem 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #c7efce);
+  color: #2c3e50;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+
 .button:hover {
-  background-color: #15803d;
+  background: linear-gradient(135deg, #b2e3df, #1ea5da);
+  /* Hover gradient */
+
   transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .error {
