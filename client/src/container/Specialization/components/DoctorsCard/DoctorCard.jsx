@@ -36,46 +36,40 @@ const DoctorCard = () => {
         doctor.specialization.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  // const handleBookAppointment = async (doctor) => {
-  //   if (!token) return alert('Please login first!');
+  const handleBookAppointment = async (doctor) => {
+    if (!token) return alert('Please login first!');
 
-  //   console.log('Access Token:', token);
+    console.log('Access Token:', token);
 
-  //   const baseUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
-  //   const eventTitle = `Appointment with Dr. ${doctor.name}`;
-  //   const location = doctor['map location'] || 'Online';
-  //   const description = `Specialization: ${doctor.specialization}
-  //   fees:${doctor.fees}`;
+    const baseUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE';
+    const eventTitle = `Appointment with Dr. ${doctor.name}`;
+    const location = doctor['map location'] || 'Online';
+    const description = `Specialization: ${doctor.specialization}
+    fees:${doctor.fees}`;
 
 
-  //   const googleCalendarUrl = `${baseUrl}&text=${encodeURIComponent(eventTitle)}&location=${encodeURIComponent(
-  //     location
-  //   )}&details=${encodeURIComponent(description)}`;
+    const googleCalendarUrl = `${baseUrl}&text=${encodeURIComponent(eventTitle)}&location=${encodeURIComponent(
+      location
+    )}&details=${encodeURIComponent(description)}`;
 
-  //   // Open the Google Calendar event creation page in a new tab
-  //   window.open(googleCalendarUrl, '_blank');
+    // Open the Google Calendar event creation page in a new tab
+    window.open(googleCalendarUrl, '_blank');
 
-  //   // Notify the doctor via email
-  //   try {
-  //     await axios.post('http://localhost:5000/api/sendEmail', {
-  //       accessToken: token, // Pass the logged-in user's access token
-  //       doctorEmail: doctor['email id'],
-  //       eventTitle,
-  //       description,
-  //       location,
-  //     });
-  //     alert('The doctor has been notified via email.');
-  //   } catch (error) {
-  //     console.error('Error sending email notification:', error);
-  //     alert('Failed to notify the doctor. Please try again.');
-  //   }
-  // };
-
-  const handleBookAppointment = (doctor) => {
-    navigate(`/book-appointment/${doctor['d-id']}`, { state: { doctor } });
+    // Notify the doctor via email
+    try {
+      await axios.post('http://localhost:5000/api/sendEmail', {
+        accessToken: token, // Pass the logged-in user's access token
+        doctorEmail: doctor['email id'],
+        eventTitle,
+        description,
+        location,
+      });
+      alert('The doctor has been notified via email.');
+    } catch (error) {
+      console.error('Error sending email notification:', error);
+      alert('Failed to notify the doctor. Please try again.');
+    }
   };
-
-
 
   return (
     <div className={styles.container}>

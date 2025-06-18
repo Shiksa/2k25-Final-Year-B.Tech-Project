@@ -11,12 +11,7 @@
 .logo {
     font-weight: 600;
     font-size: 1.5rem;
-    padding-left: 30px;
-}
-
-.icon {
-    height: 60px;
-    width: 135px;
+    padding: 1rem;
 }
 
 .searchBar {

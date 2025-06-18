@@ -10,10 +10,6 @@ const doctorRoutes = require('./routes/doctorRoutes');
 const eventRoutes = require('./routes/eventRoutes');
 const healthRecordRoutes = require("./routes/healthRecordRoutes");
 const prescriptionRoutes = require("./routes/prescriptionRoutes");
-const bookAppointmentRoutes = require('./routes/bookAppointmentRoutes');
-const chatBotRoutes = require('./routes/chatBotRoutes');
-
-
 
 dotenv.config();
 const app = express();
@@ -88,11 +84,9 @@ app.get(
 
 // API Routes
 app.use('/api', doctorRoutes); //Use the doctorRoutes module
-app.use('/api', eventRoutes); // Use the eventRoutes module //not using cuurently maybe
+app.use('/api', eventRoutes); // Use the eventRoutes module
 app.use("/api/health-records", healthRecordRoutes); // Use the healthRecordRoutes module
 app.use('/api', prescriptionRoutes); // Use the prescriptionRoutes module
-app.use('/api/bookAppointment', bookAppointmentRoutes); //use the bookAppointmentRoutes module
-app.use('/api/chat-bot', chatBotRoutes); //Use the chatBotRoutes module
 
 // Default Route
 app.get('/', (req, res) => {

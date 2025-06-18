@@ -1,60 +1,14 @@
 .healthRecordPage {
-    width: 100%;
     margin: 0 auto;
-    padding: 2rem 3rem;
     background: linear-gradient(135deg, #e3f2fd, #9CDBA6);
-    font-family: "Arial", sans-serif;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 .container {
-    width: 100%;
     margin: 0 auto;
-    padding: 2rem 3rem;
-    background: linear-gradient(135deg, #e3f2fd, #9CDBA6);
-    font-family: "Arial", sans-serif;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.card {
-    width: 100%;
-    margin: 5rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 25px;
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Gradient edge glow */
-.card::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #ffffff44, #a1c4fd44, #c2e9fb44);
-    z-index: 0;
-    pointer-events: none;
-}
-
-/* Hover animation */
-.card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    padding: 70px;
+    border: 1px solid #cce5cc;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .title {
@@ -74,30 +28,12 @@
 .input,
 .inputHalf,
 .select {
-    margin-top: 0.5rem;
-    padding: 0.8rem 1rem;
-    border: 1px solid #a3c1e0;
-    border-radius: 30px;
-    font-size: 1rem;
-    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #a5d6a7;
+    border-radius: 5px;
+    font-size: 16px;
     width: 100%;
     box-sizing: border-box;
-    transition: all 0.6s ease;
-}
-
-.input:focus,
-.inputHalf:focus,
-.select:focus,
-.textarea:focus {
-    border-color: #007acc;
-    outline: none;
-}
-
-.input:hover,
-.inputHalf:hover,
-.select:hover,
-.textarea:hover {
-    transform: scale(1.05);
 }
 
 .inputHalf {
@@ -111,38 +47,28 @@
 }
 
 .textarea {
-    margin-top: 0.5rem;
-    padding: 0.8rem 1rem;
-    border: 1px solid #a3c1e0;
-    border-radius: 30px;
-    font-size: 1rem;
-    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #a5d6a7;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: vertical;
+    min-height: 80px;
     width: 100%;
-    box-sizing: border-box;
-    transition: all 0.6s ease;
 }
 
 .button {
-    align-self: center;
-    margin-top: 0.3rem;
-    padding: 0.9rem 1.5rem;
-    background: linear-gradient(135deg, #ffffff, #c7efce);
-    color: #2c3e50;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-weight: bold;
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
     border: none;
-    border-radius: 50px;
-    font-size: 1rem;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background: linear-gradient(135deg, #b2e3df, #1ea5da);
-    /* Hover gradient */
-
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    background-color: #45a049;
 }
 
 .diagnosis {
@@ -155,35 +81,12 @@
     color: #856404;
 }
 
-.table-wrapper {
-    border-radius: 25px;
-    overflow: hidden;
-
-}
-
 .table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    margin-top: 20px;
+    border-collapse: collapse;
+    font-size: 14px;
 }
-
-.table th:first-child {
-    border-top-left-radius: 25px;
-}
-
-.table th:last-child {
-    border-top-right-radius: 25px;
-}
-
-.table tr:last-child td:first-child {
-    border-bottom-left-radius: 25px;
-}
-
-.table tr:last-child td:last-child {
-    border-bottom-right-radius: 25px;
-}
-
-
 
 .table th,
 .table td {

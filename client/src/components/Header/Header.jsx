@@ -18,9 +18,7 @@ const Header = () => {
 
     return (
         <div className={styles.root}>
-            <div className={styles.logo}>
-                <img src="medbuddy.png" alt="" className={styles.icon} />
-            </div>
+            <div className={styles.logo}>MedBuddy</div>
             <div className={styles.searchBar}>
                 <div className={styles.inputWrapper}>
                     <input
