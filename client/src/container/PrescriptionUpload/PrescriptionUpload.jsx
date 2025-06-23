@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./PrescriptionUpload.module.css";
 import { AiOutlineFileJpg } from "react-icons/ai";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const PrescriptionUpload = () => {
   const [file, setFile] = useState(null);
@@ -11,6 +12,7 @@ const PrescriptionUpload = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [showModal, setShowModal] = useState(false); // 👈 Added modal state
   const { user, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -32,7 +34,7 @@ const PrescriptionUpload = () => {
   };
 
   const handleUpload = (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
 
     if (!file || !description) {
       setError("Please select a file and enter description.");
@@ -57,10 +59,10 @@ const PrescriptionUpload = () => {
         if (response.ok) {
           setSuccessMessage("Uploaded Successfully.");
           setError("");
-          setFile(null);
-          setPreviewUrl(null);
+          // setFile(null);
+          // setPreviewUrl(null);
           setDescription("");
-          setShowModal(false); // 👈 Close modal on success
+          // setShowModal(""); // 👈 Close modal on success
         } else {
           throw new Error("Upload failed.");
         }
@@ -79,13 +81,71 @@ const PrescriptionUpload = () => {
     setShowModal(true);
   };
 
+  const handleUploadAndOpenModal = async () => {
+    try {
+      await handleUpload();
+      handleOpenModal();
+    } catch (err) {
+      console.error("Upload failed, not opening modal", err);
+    }
+  };
+
+
   const handleCloseModal = () => {
+    setSuccessMessage("");
+    setError("");
+    setFile(null);
+    setPreviewUrl(null);
+    setDescription("");
     setShowModal(false);
   };
 
-  const handleScan = () => {
-    alert("Scan functionality to be implemented.");
+  const handleScan = async () => {
+    try {
+
+      // const toBase64 = (file) =>
+      //   new Promise((resolve, reject) => {
+      //     const reader = new FileReader();
+      //     reader.readAsDataURL(file);
+      //     reader.onload = () => resolve(reader.result.split(",")[1]); // Only base64 part
+      //     reader.onerror = (error) => reject(error);
+      //   });
+
+      // const imageBase64 = await toBase64(file);
+
+      const response = await fetch("http://localhost:8000/prescription", {
+        method: "POST",
+        headers: {
+          // "Content-Type": "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        // body: JSON.stringify({
+        //   image: await toBase64(file),
+        //   filename: file.name,
+        // }),
+        body: new URLSearchParams({
+          filename: file.name,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Scan failed");
+
+      const result = await response.json();
+
+      // Now go to ScanResult.jsx with result data
+      navigate("/scan-result", {
+        state: {
+          filename: file.name,
+          drugs: result.drugs,
+          type: result.type,
+        },
+      });
+    } catch (error) {
+      console.error("Error scanning prescription:", error);
+      setError("Scan failed. Please try again.");
+    }
   };
+
 
   return (
     <div className={styles.uploadContainer}>
@@ -128,7 +188,7 @@ const PrescriptionUpload = () => {
                   type="button"
                   className={styles.uploadButton}
                   disabled={!file}
-                  onClick={handleOpenModal}
+                  onClick={handleUploadAndOpenModal}
                 >
                   Upload
                 </button>
@@ -153,7 +213,7 @@ const PrescriptionUpload = () => {
       {showModal && (
         <div className={styles.modalOverlay}>
           <div className={styles.modal}>
-            <button onClick={handleUpload} className={styles.closeButton}>✕</button>
+            <button onClick={handleCloseModal} className={styles.closeButton}>✕</button>
             {previewUrl && (
               <img src={previewUrl} alt="Preview" className={styles.modalImage} />
             )}

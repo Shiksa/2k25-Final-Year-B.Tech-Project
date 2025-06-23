@@ -13,6 +13,8 @@ import GoogleCalendarReminder from './container/MedicineReminder/GoogleCalendarR
 import OldPrescription from './container/OldPrescription/OldPrescription';
 import BookAppointment from './container/Specialization/components/BookAppointment/BookAppointment';
 import ChatBot from './container/ChatBot/ChatBot';
+import ScanResult from './container/ScanResult/ScanResult';
+import SearchMedicine from './container/SearchMedicine/SearchMedicine';
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="/prescription-upload" element={<PrescriptionUpload />} />
         <Route path="/old-prescription" element={<OldPrescription />} />
+        <Route path="/scan-result" element={<ScanResult />} />
+        <Route path="/price-comparison" element={<SearchMedicine />} />
         <Route path="/period-tracker" element={<PeriodTracker />} />
         <Route path="/customer-support" element={<CustomerSupport />} />
         <Route path="/faqs" element={<FAQs />} />
