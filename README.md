@@ -156,7 +156,7 @@ The application follows a **3-layer microservice architecture**:
 
 ### 🤖 AI Chatbot
 
-- LLaMA-based conversational assistant  
+- LLaMA-based conversational assistant (llama3-70b-8192)
 - Context-aware responses  
 - Provides general healthcare guidance  
 - Enhances user interaction  
