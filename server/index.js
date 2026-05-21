@@ -31,10 +31,7 @@ app.use(passport.session());
 
 // MongoDB Connection
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected!'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
@@ -47,7 +44,15 @@ passport.use(
       callbackURL: process.env.REDIRECT_URI,
     },
     (accessToken, refreshToken, profile, done) => {
-      return done(null, { ...profile, accessToken }); // Pass access token along with user profile
+
+      console.log("ACCESS TOKEN:", accessToken);
+      console.log("REFRESH TOKEN:", refreshToken);
+
+      return done(null, {
+        ...profile,
+        accessToken,
+        refreshToken,
+      });
     }
   )
 );
@@ -64,10 +69,16 @@ passport.deserializeUser((user, done) => {
 app.get(
   '/auth/google',
   passport.authenticate('google', {
-    scope: ['profile', 'email', 'https://www.googleapis.com/auth/calendar.events', 'https://www.googleapis.com/auth/gmail.send', // Required for sending emails
+    scope: [
+      'profile',
+      'email',
+      'https://www.googleapis.com/auth/calendar.events',
+      'https://www.googleapis.com/auth/gmail.send',
       'https://www.googleapis.com/auth/gmail.compose',
-      'https://www.googleapis.com/auth/gmail.modify', // Optional, for email modifications
-    ]
+      'https://www.googleapis.com/auth/gmail.modify',
+    ],
+    accessType: 'offline',
+    prompt: 'consent',
   })
 );
 

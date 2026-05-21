@@ -20,7 +20,8 @@ router.post('/chat', async (req, res) => {
   try {
     const response = await openai.chat.completions.create({
       // model: 'gpt-3.5-turbo',
-      model: 'llama3-70b-8192', // ✅ Groq-supported model
+      //model: 'llama3-70b-8192', // ✅ Groq-supported model //no more support
+      model: 'llama-3.3-70b-versatile', //updated model 
       messages: [
         {
           role: 'system',

@@ -31,7 +31,7 @@ const DoctorCard = () => {
   // Filter doctors by specialization and search query
   const filteredDoctors = doctors.filter(
     (doctor) =>
-      (!specialization || doctor.specialization.toLowerCase() === specialization.toLowerCase()) &&
+      (!specialization || doctor.specialization.toLowerCase().includes(specialization.toLowerCase())) &&
       (doctor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doctor.specialization.toLowerCase().includes(searchQuery.toLowerCase()))
   );
