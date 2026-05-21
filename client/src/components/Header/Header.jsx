@@ -27,18 +27,23 @@ const Header = () => {
                         type="text"
                         value={searchQuery}
                         onChange={handleChange}
-                        placeholder={placeholderText}
+                        placeholder=""
                         className={styles.input}
                     />
-                    <TypingEffect
-                        text={["Search...", "Find what you need!", "Type to search..."]}
-                        speed={100}
-                        eraseSpeed={50}
-                        eraseDelay={500}
-                        typingDelay={500}
-                        onTyping={handleTypingEffect}
-                        className={styles.typingText}
-                    />
+                    {!searchQuery && (
+                        <TypingEffect
+                            text={[
+                                "Search...",
+                                "Find what you need!",
+                                "Type to search..."
+                            ]}
+                            speed={100}
+                            eraseSpeed={50}
+                            eraseDelay={1000}
+                            typingDelay={500}
+                            className={styles.typingText}
+                        />
+                    )}
                 </div>
             </div>
             {isAuthenticated ? (
