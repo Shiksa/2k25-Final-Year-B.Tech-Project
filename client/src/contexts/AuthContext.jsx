@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogin = () => {
     // Redirect to Google OAuth login
-    window.location.href = 'http://localhost:5000/auth/google';
+    window.location.href = `${import.meta.env.VITE_NODE_URL}/auth/google`;
   };
 
   const handleLogout = () => {

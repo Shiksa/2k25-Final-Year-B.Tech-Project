@@ -25,7 +25,7 @@ const SearchMedicine = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/search",
+        `${import.meta.env.VITE_FLASK_URL}/search`,
         new URLSearchParams({ name: query.trim() }),
         {
           headers: {

@@ -17,7 +17,7 @@ const ScanResult = () => {
     setLoading(true);
     setHasCompared(true); // 🆕
     try {
-      const response = await fetch("http://localhost:8000/search", {
+      const response = await fetch(`${import.meta.env.VITE_FLASK_URL}/search`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",

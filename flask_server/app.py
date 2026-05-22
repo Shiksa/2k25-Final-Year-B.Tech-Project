@@ -7,6 +7,10 @@ load_dotenv()  # loads flask_server/.env into os.environ
 import json
 from scrape.apollo import apollo
 from scrape.medibuddy import medibuddy
+from scrape.onemg import onemg
+from scrape.pharmeasy import pharmeasy
+from scrape.netmeds import netmeds
+from scrape.truemeds import truemeds
 
 from flipkart.flipkart import build_array
 from medextractor.main import super_parse
@@ -41,7 +45,9 @@ def factor(X, Y):
 app = Flask(__name__)
 cors = CORS(app)
 
-FUNCTIONS = [apollo, medibuddy]
+FUNCTIONS = [medibuddy, 
+            # onemg, pharmeasy, netmeds, truemeds, apollo, 
+            ]
 
 @app.route('/')
 def hello_world():
@@ -60,16 +66,17 @@ def search():
         "alternatives": []
     }
     for function in FUNCTIONS:
-        if function == apollo:
-            apollo_response = json.loads(function(name))
-            apollo_response["accuracy"] = factor(name.lower().replace(" ", ""), apollo_response["name"].lower().replace(" ", ""))
-            response["desc"] = apollo_response["desc"]
-            del apollo_response["desc"]
-            response["sources"].append(apollo_response)
-        else:
-            temporary = json.loads(function(name))
-            temporary["accuracy"] = factor(name.lower().replace(" ", ""), temporary["name"].lower().replace(" ", ""))
-            response["sources"].append(temporary)
+        try:
+            result = json.loads(function(name))
+            if not result.get("name"):
+                continue
+            result["accuracy"] = factor(name.lower().replace(" ", ""), result["name"].lower().replace(" ", ""))
+            if "desc" in result:
+                response["desc"] = result.pop("desc")
+            response["sources"].append(result)
+        except Exception as e:
+            print(f"[search] {function.__name__} error: {e}")
+            continue
     return jsonify(response)
 
 @cross_origin()

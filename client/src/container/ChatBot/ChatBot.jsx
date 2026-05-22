@@ -35,7 +35,7 @@ const ChatBot = () => {
     setIsTyping(true);
 
     try {
-      const res = await axios.post('http://localhost:5000/api/chat-bot/chat', {
+      const res = await axios.post(`${import.meta.env.VITE_NODE_URL}/api/chat-bot/chat`, {
         message: input
       });
 

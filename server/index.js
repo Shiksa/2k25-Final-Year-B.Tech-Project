@@ -87,7 +87,7 @@ app.get(
   passport.authenticate('google', { failureRedirect: '/' }),
   (req, res) => {
     res.redirect(
-      `http://localhost:5173?token=${req.user.accessToken}&name=${encodeURIComponent(
+      `${process.env.CLIENT_URL}?token=${req.user.accessToken}&name=${encodeURIComponent(
         req.user.displayName
       )}&email=${encodeURIComponent(req.user.emails[0].value)}&picture=${encodeURIComponent(
         req.user.photos[0].value

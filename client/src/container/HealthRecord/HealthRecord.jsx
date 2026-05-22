@@ -32,7 +32,7 @@ const HealthRecord = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/api/health-records/${user.email}`)
+            fetch(`${import.meta.env.VITE_NODE_URL}/api/health-records/${user.email}`)
                 .then(res => res.json())
                 .then(data => setRecords(data))
                 .catch(err => console.error(err));
@@ -46,7 +46,7 @@ const HealthRecord = () => {
 
     const handleDelete = async (idToDelete) => {
         try {
-            await fetch(`http://localhost:5000/api/health-records/${idToDelete}`, {
+            await fetch(`${import.meta.env.VITE_NODE_URL}/api/health-records/${idToDelete}`, {
                 method: "DELETE",
             });
             setRecords(records.filter(record => record._id !== idToDelete));
@@ -124,7 +124,7 @@ const HealthRecord = () => {
         };
 
         try {
-            const response = await fetch("http://localhost:5000/api/health-records", {
+            const response = await fetch(`${import.meta.env.VITE_NODE_URL}/api/health-records`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newRecord),

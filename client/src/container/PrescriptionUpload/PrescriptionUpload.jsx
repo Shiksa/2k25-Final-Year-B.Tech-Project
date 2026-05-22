@@ -51,7 +51,7 @@ const PrescriptionUpload = () => {
     formData.append("userEmail", user.email);
     formData.append("description", description);
 
-    fetch("http://localhost:5000/api/prescriptions/upload", {
+    fetch(`${import.meta.env.VITE_NODE_URL}/api/prescriptions/upload`, {
       method: "POST",
       body: formData,
     })
@@ -113,7 +113,7 @@ const PrescriptionUpload = () => {
 
       // const imageBase64 = await toBase64(file);
 
-      const response = await fetch("http://localhost:8000/prescription", {
+      const response = await fetch(`${import.meta.env.VITE_FLASK_URL}/prescription`, {
         method: "POST",
         headers: {
           // "Content-Type": "application/json",

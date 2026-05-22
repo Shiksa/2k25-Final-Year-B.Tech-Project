@@ -110,7 +110,7 @@ router.post("/prescriptions/scan/:id", async (req, res) => {
     });
 
     const flaskResponse = await axios.post(
-      "http://localhost:8000/prescription",
+      `${process.env.FLASK_URL}/prescription`,
       formData,
       {
         headers: formData.getHeaders(),
