@@ -1,7 +1,7 @@
 // ScanResult.jsx
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import styles from "./scanResult.module.css";
+import styles from "./ScanResult.module.css";
 
 const ScanResult = () => {
   const location = useLocation();
