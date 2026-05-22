@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
+from dotenv import load_dotenv
+
+load_dotenv()  # loads flask_server/.env into os.environ
 
 import json
 from scrape.apollo import apollo
 from scrape.medibuddy import medibuddy
-# from scrape.pharmeasy import pharmeasy
-from scrape.onemg import onemg
 
 from flipkart.flipkart import build_array
 from medextractor.main import super_parse
@@ -40,7 +41,7 @@ def factor(X, Y):
 app = Flask(__name__)
 cors = CORS(app)
 
-FUNCTIONS = [apollo, medibuddy, onemg]
+FUNCTIONS = [apollo, medibuddy]
 
 @app.route('/')
 def hello_world():

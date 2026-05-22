@@ -24,7 +24,6 @@
 }
 
 .inputWrapper {
-    display: flex;
     position: relative;
     align-items: center;
 }
@@ -40,8 +39,13 @@
 
 .typingText {
     position: absolute;
-    color: #000;
-    padding: 10px;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6f7379;
+    font-size: 15px;
+    opacity: 0.8;
+    pointer-events: none;
 }
 
 .profilePic {

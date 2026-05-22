@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./SearchMedicine.module.css";
 import axios from "axios";
-import bgImage from '../../../public/med-bg.png';
+//import bgImage from '../../../public/med-bg.png';
 
 
 
@@ -54,7 +54,7 @@ const SearchMedicine = () => {
 
       {/* 🔍 Search Box in Card */}
       <div className={styles.wrap}>
-        <div className={styles.searchBoxCard} style={{ backgroundImage: `url(${bgImage})` }} >
+        <div className={styles.searchBoxCard} style={{ backgroundImage: `url('/med-bg.png')` }} >
           <input
             type="text"
             value={query}
