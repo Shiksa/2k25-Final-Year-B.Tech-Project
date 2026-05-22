@@ -19,7 +19,7 @@ const DoctorCard = () => {
 
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/doctors')
+    axios.get(`${import.meta.env.VITE_NODE_URL}/api/doctors`)
       .then((response) => {
         setDoctors(response.data);
       })
@@ -57,7 +57,7 @@ const DoctorCard = () => {
 
   //   // Notify the doctor via email
   //   try {
-  //     await axios.post('http://localhost:5000/api/sendEmail', {
+  //     await axios.post(`${import.meta.env.VITE_NODE_URL}/api/sendEmail`, {
   //       accessToken: token, // Pass the logged-in user's access token
   //       doctorEmail: doctor['email id'],
   //       eventTitle,

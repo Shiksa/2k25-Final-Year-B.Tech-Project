@@ -15,7 +15,7 @@ const OldPrescription = () => {
     if (!isAuthenticated && !user?.email) return;
 
     axios
-      .get(`http://localhost:5000/api/prescriptions/all?userEmail=${user.email}`)
+      .get(`${import.meta.env.VITE_NODE_URL}/api/prescriptions/all?userEmail=${user.email}`)
       .then((res) => setPrescriptions(res.data))
       .catch((err) => console.error("Error fetching prescriptions:", err));
   }, [user]);
@@ -23,7 +23,7 @@ const OldPrescription = () => {
   const deletePrescription = (id) => {
 
     axios
-      .delete(`http://localhost:5000/api/prescriptions/delete/${id}`)
+      .delete(`${import.meta.env.VITE_NODE_URL}/api/prescriptions/delete/${id}`)
       .then(() => {
         setPrescriptions((prev) => prev.filter((p) => p._id !== id));
       })
@@ -33,7 +33,7 @@ const OldPrescription = () => {
   const scanPrescription = async (id) => {
     try {
       // 1. Get image as blob from MongoDB
-      const imageUrl = `http://localhost:5000/api/prescriptions/view/${id}`;
+      const imageUrl = `${import.meta.env.VITE_NODE_URL}/api/prescriptions/view/${id}`;
       const imageRes = await fetch(imageUrl);
       const imageBlob = await imageRes.blob();
 
@@ -43,11 +43,11 @@ const OldPrescription = () => {
       // 3. Upload temporarily
       const uploadFormData = new FormData();
       uploadFormData.append("file", file);
-      const uploadRes = await axios.post("http://localhost:5000/api/temp-upload", uploadFormData);
+      const uploadRes = await axios.post(`${import.meta.env.VITE_NODE_URL}/api/temp-upload`, uploadFormData);
       const { tempFileName } = uploadRes.data;
 
       // 4. Call /prescription on Flask with just filename in URL-encoded format
-      const scanRes = await fetch("http://localhost:8000/prescription", {
+      const scanRes = await fetch(`${import.meta.env.VITE_FLASK_URL}/prescription`, {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -120,12 +120,12 @@ const OldPrescription = () => {
                 <td>{prescription.description}</td>
                 <td>
                   <img
-                    src={`http://localhost:5000/api/prescriptions/view/${prescription._id}`}
+                    src={`${import.meta.env.VITE_NODE_URL}/api/prescriptions/view/${prescription._id}`}
                     alt={prescription.fileName}
                     className={styles.thumb}
                     onClick={() => handleImageClick(prescription)}
                   />
-                </td>
+                </td >
                 <td>
                   <button
                     onClick={() => scanPrescription(prescription._id)}
@@ -140,33 +140,35 @@ const OldPrescription = () => {
                     <FaTrash />
                   </button>
                 </td>
-              </tr>
+              </tr >
             ))}
-          </tbody>
-        </table>
+          </tbody >
+        </table >
       )}
 
-      {selectedPrescription && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <button className={styles.closeBtn} onClick={closeModal}>
-              <FaTimes />
-            </button>
-            <img
-              src={`http://localhost:5000/api/prescriptions/view/${selectedPrescription._id}`}
-              alt="Prescription"
-              className={styles.fullImage}
-            />
-            <button
-              onClick={() => scanPrescription(selectedPrescription._id)}
-              className={styles.scanLargeBtn}
-            >
-              Scan
-            </button>
+      {
+        selectedPrescription && (
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <button className={styles.closeBtn} onClick={closeModal}>
+                <FaTimes />
+              </button>
+              <img
+                src={`${import.meta.env.VITE_NODE_URL}/api/prescriptions/view/${selectedPrescription._id}`}
+                alt="Prescription"
+                className={styles.fullImage}
+              />
+              <button
+                onClick={() => scanPrescription(selectedPrescription._id)}
+                className={styles.scanLargeBtn}
+              >
+                Scan
+              </button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+    </div >
   );
 };
 
