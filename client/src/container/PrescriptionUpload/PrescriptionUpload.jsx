@@ -102,37 +102,26 @@ const PrescriptionUpload = () => {
 
   const handleScan = async () => {
     try {
+      // Step 1 — upload file to Node first
+      const uploadFormData = new FormData();
+      uploadFormData.append("file", file);
+      const uploadRes = await fetch(`${import.meta.env.VITE_NODE_URL}/api/temp-upload`, {
+        method: "POST",
+        body: uploadFormData,
+      });
+      if (!uploadRes.ok) throw new Error("Temp upload failed");
+      const { tempFileName } = await uploadRes.json();
 
-      // const toBase64 = (file) =>
-      //   new Promise((resolve, reject) => {
-      //     const reader = new FileReader();
-      //     reader.readAsDataURL(file);
-      //     reader.onload = () => resolve(reader.result.split(",")[1]); // Only base64 part
-      //     reader.onerror = (error) => reject(error);
-      //   });
-
-      // const imageBase64 = await toBase64(file);
-
+      // Step 2 — send filename to Flask for scanning
       const response = await fetch(`${import.meta.env.VITE_FLASK_URL}/prescription`, {
         method: "POST",
-        headers: {
-          // "Content-Type": "application/json",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        // body: JSON.stringify({
-        //   image: await toBase64(file),
-        //   filename: file.name,
-        // }),
-        body: new URLSearchParams({
-          filename: file.name,
-        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ filename: tempFileName }),
       });
 
       if (!response.ok) throw new Error("Scan failed");
-
       const result = await response.json();
 
-      // Now go to ScanResult.jsx with result data
       navigate("/scan-result", {
         state: {
           filename: file.name,
