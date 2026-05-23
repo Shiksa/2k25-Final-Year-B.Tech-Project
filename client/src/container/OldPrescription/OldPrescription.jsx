@@ -32,49 +32,29 @@ const OldPrescription = () => {
 
   const scanPrescription = async (id) => {
     try {
-      // 1. Get image as blob from MongoDB
       const imageUrl = `${import.meta.env.VITE_NODE_URL}/api/prescriptions/view/${id}`;
       const imageRes = await fetch(imageUrl);
       const imageBlob = await imageRes.blob();
 
-      // 2. Create a temporary File object
-      const file = new File([imageBlob], "temp_prescription.jpg", { type: imageBlob.type });
+      const formData = new FormData();
+      formData.append("file", new File([imageBlob], "prescription.jpg", { type: imageBlob.type }));
 
-      // 3. Upload temporarily
-      const uploadFormData = new FormData();
-      uploadFormData.append("file", file);
-      const uploadRes = await axios.post(`${import.meta.env.VITE_NODE_URL}/api/temp-upload`, uploadFormData);
-      const { tempFileName } = uploadRes.data;
-
-      // 4. Call /prescription on Flask with just filename in URL-encoded format
       const scanRes = await fetch(`${import.meta.env.VITE_FLASK_URL}/prescription`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          filename: tempFileName, // same as uploaded name
-        }),
+        body: formData,
       });
 
       if (!scanRes.ok) throw new Error("Scan failed");
+      const result = await scanRes.json();
 
-      const result = await scanRes.json(); // read JSON result from Flask
-
-      // 5. Navigate to ScanResult page
       navigate("/scan-result", {
-        state: {
-          filename: file.name,
-          drugs: result.drugs,
-          type: result.type,
-        },
+        state: { filename: "prescription.jpg", drugs: result.drugs, type: result.type },
       });
     } catch (error) {
       console.error("Scan error:", error);
       alert("Scan failed.");
     }
   };
-
 
 
   const handleImageClick = (prescription) => {

@@ -92,47 +92,32 @@ def alternative():
 @cross_origin()
 @app.route('/prescription', methods=["GET", "POST"])
 def prescription():
-    if request.method == 'GET':
-        filename = request.args.get('filename')
+    # Direct file upload (hosted — Flask and Node on separate servers)
+    if request.files.get('file'):
+        f = request.files['file']
+        upath = os.path.join(os.path.dirname(__file__), 'temp', f.filename)
+        os.makedirs(os.path.dirname(upath), exist_ok=True)
+        f.save(upath)
+
+    # Filename only (local — Flask and Node share disk)
+    else:
+        filename = request.form.get('filename') or request.args.get('filename')
+        if not filename:
+            return jsonify({"error": "No file provided"}), 400
         upath = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'server', 'uploads', filename))
+
+    if not os.path.exists(upath):
+        return jsonify({"error": "File not found"}), 404
+
+    try:
         response = json.loads(super_parse(upath))
-        os.remove(upath)
         return jsonify(response)
-
-    # elif request.method == 'POST':
-    #     try:
-    #         data = request.get_json()
-    #         if 'image' in data:
-    #             base64_image = data['image']
-    #             filename = data.get('filename', f"{uuid.uuid4().hex}.jpg")
-
-    #             # Decode base64 and save temporarily
-    #             image_data = base64.b64decode(base64_image.split(",")[-1])
-    #             image = Image.open(BytesIO(image_data)).convert("RGB")
-
-    #             save_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'temp', filename))
-    #             os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    #             image.save(save_path, format='JPEG')
-
-    #             result = json.loads(super_parse(save_path))
-    #             os.remove(save_path)
-    #             return jsonify(result)
-
-    #         else:
-    #             # fallback to old method
-
-    elif request.method == 'POST': #this will be removed if uncomment previous lines
-        filename = request.form.get('filename')
-        upath = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'server', 'uploads', filename))
-        response = json.loads(super_parse(upath))
-        os.remove(upath)
-        return jsonify(response)
-
-    # except Exception as e:
-    #     import traceback
-    #         traceback.print_exc()
-    #         print("Exception in /prescription POST:", e)
-    #         return jsonify({"error": "Failed to process image", "details": str(e)}), 500
-
+    except Exception as e:
+        print(f"[Prescription error] {e}")
+        return jsonify({"error": "Failed to process", "details": str(e)}), 500
+    finally:
+        if os.path.exists(upath):
+            os.remove(upath)
+            
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
