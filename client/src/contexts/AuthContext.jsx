@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
       // Save token and user data to local storage and state
       setToken(authToken);
       localStorage.setItem('access_token', authToken);
+      localStorage.setItem('google_access_token', authToken);
 
       const userData = { name, email, picture };
       setUser(userData);

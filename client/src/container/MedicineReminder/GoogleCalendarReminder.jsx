@@ -1,38 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styles from './GoogleCalendarReminder.module.css';
 
-const CLIENT_ID = import.meta.env.VITE_CLIENT_ID;
-const SCOPES = 'https://www.googleapis.com/auth/calendar.events';
-
 function GoogleCalendarReminder() {
   const [medicineName, setMedicineName] = useState('');
   const [date, setDate] = useState('');
   const [doseCount, setDoseCount] = useState(1);
   const [doseTimes, setDoseTimes] = useState(['']);
   const [repeat, setRepeat] = useState('none');
-  const [tokenClient, setTokenClient] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
-
-  useEffect(() => {
-    // Load Google Identity Services script
-    const script = document.createElement('script');
-    script.src = 'https://accounts.google.com/gsi/client';
-    script.async = true;
-    script.defer = true;
-    script.onload = () => {
-      const client = window.google.accounts.oauth2.initTokenClient({
-        client_id: CLIENT_ID,
-        scope: SCOPES,
-        callback: (response) => {
-          if (response.access_token) {
-            setAccessToken(response.access_token);
-          }
-        },
-      });
-      setTokenClient(client);
-    };
-    document.body.appendChild(script);
-  }, []);
+  const accessToken = localStorage.getItem('google_access_token');
 
   useEffect(() => {
     const newTimes = Array.from({ length: doseCount }, (_, i) => doseTimes[i] || '');
@@ -83,30 +58,18 @@ function GoogleCalendarReminder() {
         const err = await res.json();
         throw new Error(err.error?.message || 'Failed to create event');
       }
-
-      console.log('✅ Reminder created');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!accessToken) {
+      alert('Please login first to set reminders.');
+      return;
+    }
     try {
-      if (accessToken) {
-        // Already have token — use it directly
-        await createEvents(accessToken);
-        alert('✅ All medicine reminders created!');
-      } else {
-        // Request token — Google sign-in popup will appear
-        tokenClient.callback = async (response) => {
-          if (response.error) throw new Error(response.error);
-          setAccessToken(response.access_token);
-          await createEvents(response.access_token);
-          alert('✅ All medicine reminders created!');
-        };
-        tokenClient.requestAccessToken({ prompt: 'consent' });
-      }
-
+      await createEvents(accessToken);
+      alert('✅ All medicine reminders created!');
       setMedicineName('');
       setDate('');
       setDoseCount(1);
