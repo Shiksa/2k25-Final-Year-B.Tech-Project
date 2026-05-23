@@ -102,32 +102,19 @@ const PrescriptionUpload = () => {
 
   const handleScan = async () => {
     try {
-      // Step 1 — upload file to Node first
-      const uploadFormData = new FormData();
-      uploadFormData.append("file", file);
-      const uploadRes = await fetch(`${import.meta.env.VITE_NODE_URL}/api/temp-upload`, {
-        method: "POST",
-        body: uploadFormData,
-      });
-      if (!uploadRes.ok) throw new Error("Temp upload failed");
-      const { tempFileName } = await uploadRes.json();
+      const formData = new FormData();
+      formData.append("file", file);
 
-      // Step 2 — send filename to Flask for scanning
       const response = await fetch(`${import.meta.env.VITE_FLASK_URL}/prescription`, {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ filename: tempFileName }),
+        body: formData,
       });
 
       if (!response.ok) throw new Error("Scan failed");
       const result = await response.json();
 
       navigate("/scan-result", {
-        state: {
-          filename: file.name,
-          drugs: result.drugs,
-          type: result.type,
-        },
+        state: { filename: file.name, drugs: result.drugs, type: result.type },
       });
     } catch (error) {
       console.error("Error scanning prescription:", error);
